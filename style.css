@@ -3,36 +3,34 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #fff; /* 白色背景 */
+    background-color: #fff;
 }
 
-/* --- 新增的顶部介绍部分样式 --- */
+/* --- 顶部介绍部分样式 --- */
 .intro-section {
-    padding: 80px 5% 20px; /* 上下留出更多空间 */
-    max-width: 1400px;
+    padding: 80px 5% 20px;
+/*    max-width: 1400px;*/
+    margin: 0 auto; /* 居中容器 */
 }
 
-/* 大标题 LOREM IPSUM #034 */
 .page-header-title {
     font-size: 3.5vw;
     font-weight: 700;
     text-align: center;
     margin-bottom: 80px;
     color: #333;
-    letter-spacing: 0.1em; /* 增加字母间距 */
+    letter-spacing: 0.1em;
 }
 
-/* 两栏文本容器 */
 .text-columns {
     display: flex;
     justify-content: space-between;
-    gap: 80px; /* 两栏之间的间距 */
+    gap: 80px;
     padding: 0 5%;
 }
 
-/* 单个文本栏 */
 .column {
-    flex: 1; /* 两栏平分空间 */
+    flex: 1;
 }
 
 .column-title {
@@ -44,18 +42,17 @@ body {
 
 .column p {
     font-size: 0.95rem;
-    line-height: 1.8; /* 增加行高以提高可读性 */
+    line-height: 1.8;
     color: #555;
 }
 
-/* 文本中的黄色高亮 */
 .highlight {
-    background-color: #ffe81a; /* 类似截图中的黄色高亮 */
+    background-color: #ffe81a;
     padding: 2px 0;
-    line-height: 1; /* 确保高亮不破坏行高 */
+    line-height: 1;
 }
 
-/* 响应式调整：小屏幕下文本变为单列 */
+/* 顶部介绍部分的响应式调整 */
 @media (max-width: 900px) {
     .text-columns {
         flex-direction: column;
@@ -68,17 +65,15 @@ body {
     }
 }
 
+/* ------------------------------------- */
 
-/* --- 之前的内容样式 (画廊部分) --- */
+/* --- 画廊部分样式 --- */
 
-/* 页面/部分样式 */
 .page-section {
-    min-height: 100vh;
+/*    min-height: 100vh;*/
     padding: 80px 5% 40px;
     box-sizing: border-box;
 }
-
-/* 主标题 1. LACINIA VELIT / 2. EFICITU ELIT */
 .main-title {
     font-size: 3.5vw; 
     font-weight: 700;
@@ -86,59 +81,66 @@ body {
     margin-bottom: 50px;
     color: #333;
 }
-
-/* ... (其余的 .gallery-grid 和 .grid-item 样式保持不变) ... */
+/* 网格布局：强制每行3列，列宽平均分配 */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 200px; 
-    gap: 20px; 
+    grid-template-columns: repeat(3, 1fr); /* 固定3列，每行必为3张 */
+    column-gap: 100px; /* 图片间距，可按需调整 */
+    row-gap: 130px;
     width: 90%;
     max-width: 1400px;
     margin: 0 auto;
 }
-
+/* 图片容器基础样式：溢出隐藏 */
 .grid-item {
     background-color: #e8e8e8; 
     position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid #ddd;
+    overflow: hidden; /* 截断超出比例的图片部分 */
+}
+/* 第一种比例：3:4（宽:高，竖版） */
+.ratio-3-4 {
+    aspect-ratio: 3 / 4; /* 固定宽高比，不受列宽影响 */
+}
+/* 第二种比例：4:3（宽:高，横版） */
+.ratio-4-3 {
+    aspect-ratio: 4 / 3; /* 固定宽高比，保证图片不变形 */
+}
+/* 图片适配规则：填充容器且居中 */
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 覆盖容器（需完整显示可改为contain） */
+    object-position: center; /* 优先显示图片主体 */
+    transition: transform 0.3s ease-in-out;
 }
 
-.grid-item::before {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(to bottom right, transparent 48%, #c5c5c5 50%, transparent 52%); 
+
+/* --- 新增：单列画廊布局 --- */
+.gallery-grid-single-column {
+    display: grid;
+    /* 【关键】只设置一列，占据全部可用宽度 */
+    grid-template-columns: 1fr; 
+    /* 保持与多列画廊相同的间距风格 */
+    gap: 30px; 
+    /* 继承外部容器的宽度和居中设置 */
+    width: 90%;
+/*    max-width: 1400px;*/
+    margin: 0 auto;
 }
 
-.grid-item::after {
-    content: attr(data-label);
-    position: absolute;
-    bottom: -30px; 
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.85rem;
-    color: #888;
-    white-space: nowrap;
+/* --- 新增：16:9 宽高比 --- */
+.ratio-16-9 {
+    aspect-ratio: 16 / 9; /* 经典的宽屏电影比例 */
+    /* 移除瀑布流的行跨度设置，让 aspect-ratio 控制高度 */
+    grid-row-end: unset !important; 
 }
 
-.wide {
-    grid-column: span 2;
-}
 
-.tall {
-    grid-row: span 2;
-}
 
-.square {
-    grid-column: span 1;
-    grid-row: span 1;
-}
+
+
+
+
 
 /* 底部版权信息 */
 .footer {
@@ -155,10 +157,6 @@ body {
         grid-template-columns: 1fr;
         grid-auto-rows: 250px;
         gap: 15px;
-    }
-    .wide, .tall, .square {
-        grid-column: span 1;
-        grid-row: span 1;
     }
     .main-title {
         font-size: 8vw;
