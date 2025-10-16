@@ -121,7 +121,7 @@ body {
     /* 【关键】只设置一列，占据全部可用宽度 */
     grid-template-columns: 1fr; 
     /* 保持与多列画廊相同的间距风格 */
-    gap: 30px; 
+    gap: 40px; 
     /* 继承外部容器的宽度和居中设置 */
     width: 90%;
 /*    max-width: 1400px;*/
