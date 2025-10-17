@@ -148,17 +148,6 @@ body {
     padding-bottom: 20px;
 }
 
-/* 画廊部分的响应式调整 */
-/*@media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 250px;
-        gap: 15px;
-    }
-    .main-title {
-        font-size: 8vw;
-    }
-}*/
 @media (max-width: 768px) {
     .gallery-grid {
         grid-template-columns: 1fr; /* 保持单列堆叠 */
