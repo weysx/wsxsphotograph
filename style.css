@@ -88,7 +88,7 @@ body {
     column-gap: 100px; /* 图片间距，可按需调整 */
     row-gap: 130px;
     width: 90%;
-    max-width: 1400px;
+/*    max-width: 1400px;*/
     margin: 0 auto;
 }
 /* 图片容器基础样式：溢出隐藏 */
